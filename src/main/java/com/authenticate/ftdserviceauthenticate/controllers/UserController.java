@@ -2,7 +2,6 @@ package com.authenticate.ftdserviceauthenticate.controllers;
 
 import com.authenticate.ftdserviceauthenticate.models.User;
 import com.authenticate.ftdserviceauthenticate.services.UserService;
-import jakarta.validation.constraints.Email;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,7 +29,7 @@ public class UserController {
     }
 
     @GetMapping("/user/email")
-    public Optional<User> getUserByEmail(Email email) {
+    public Optional<User> getUserByEmail(String email) {
         return  userService.getUser(email);
     }
 

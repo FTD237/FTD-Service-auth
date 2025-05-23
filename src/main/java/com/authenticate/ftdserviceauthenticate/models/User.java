@@ -2,6 +2,7 @@ package com.authenticate.ftdserviceauthenticate.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.UUID;
 
@@ -11,13 +12,15 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-    private Email email;
+    @Email
+    @NotBlank
+    private String email;
     private String password;
     private Integer accountStatus;
 
     public User() {}
 
-    public User(Email email, String password) {
+    public User(String email, String password) {
         this.email = email;
         this.password = password;
         this.accountStatus = 1;
@@ -27,11 +30,11 @@ public class User {
         return id;
     }
 
-    public void setEmail(Email email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    public Email getEmail() {
+    public String getEmail() {
         return email;
     }
 

@@ -2,7 +2,6 @@ package com.authenticate.ftdserviceauthenticate.services;
 
 import com.authenticate.ftdserviceauthenticate.models.User;
 import com.authenticate.ftdserviceauthenticate.repositories.UserRepository;
-import jakarta.validation.constraints.Email;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,7 +21,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public Optional<User> getUser(Email email) {
+    public Optional<User> getUser(String email) {
         return userRepository.findByEmail(email);
     }
 
