@@ -4,6 +4,7 @@ import com.authenticate.ftdserviceauthenticate.models.DTOs.UserInfo;
 import com.authenticate.ftdserviceauthenticate.models.User;
 import com.authenticate.ftdserviceauthenticate.repositories.UserRepository;
 import com.authenticate.ftdserviceauthenticate.utils.exceptions.UserNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -11,11 +12,8 @@ import java.util.UUID;
 @Service
 public class UserService {
 
-    private final UserRepository userRepository;
-
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    @Autowired
+    private UserRepository userRepository;
 
     public boolean existsByEmail(String email) {
         return userRepository.existsByEmail(email);
@@ -24,6 +22,10 @@ public class UserService {
     public User getUser(String email) {
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
+    }
+
+    public void saveUser(User user) {
+        userRepository.save(user);
     }
 
     public User getUserById(UUID id) { return userRepository.findById(id)

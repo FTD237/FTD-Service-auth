@@ -1,12 +1,10 @@
 package com.authenticate.ftdserviceauthenticate.utils;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.Date;
 
-@Setter
-@Getter
+@Data
 public class ErrorResponse {
 
     private String error;
