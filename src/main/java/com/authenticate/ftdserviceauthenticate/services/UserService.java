@@ -1,11 +1,11 @@
 package com.authenticate.ftdserviceauthenticate.services;
 
+import com.authenticate.ftdserviceauthenticate.models.DTOs.UserInfo;
 import com.authenticate.ftdserviceauthenticate.models.User;
 import com.authenticate.ftdserviceauthenticate.repositories.UserRepository;
+import com.authenticate.ftdserviceauthenticate.utils.exceptions.UserNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -17,32 +17,22 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public boolean existsByEmail(String email) {
+        return userRepository.existsByEmail(email);
     }
 
-    public Optional<User> getUser(String email) {
-        return userRepository.findByEmail(email);
+    public User getUser(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
     }
 
-    public Optional<User> getUserById(UUID id) { return userRepository.findById(id); }
+    public User getUserById(UUID id) { return userRepository.findById(id)
+            .orElseThrow(() -> new UserNotFoundException("user not found")); }
 
-    public User createUser(User user) {
-        return userRepository.save(user);
+
+    public UserInfo getUserInfoByEmail(String email) {
+        User user = getUser(email);
+        return new UserInfo(user.getId(), user.getUserName(), user.getEmail());
     }
 
-    public User updateUser(UUID id, User user) {
-        User existingUser = userRepository.findById(id).orElse(null);
-        if (existingUser != null) {
-            existingUser.setEmail(user.getEmail());
-            existingUser.setPassword(user.getPassword());
-            return userRepository.save(existingUser);
-        } else {
-            return null;
-        }
-    }
-
-    public void deleteUser(UUID id) {
-        userRepository.findById(id).ifPresent(User::disableAccount);
-    }
 }

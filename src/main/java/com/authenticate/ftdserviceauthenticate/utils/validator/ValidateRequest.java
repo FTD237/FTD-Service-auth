@@ -1,13 +1,11 @@
 package com.authenticate.ftdserviceauthenticate.utils.validator;
 
 import jakarta.validation.constraints.NotBlank;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.UUID;
 
-@Getter
-@Setter
+@Data
 public class ValidateRequest {
 
     @NotBlank(message= "ID user is required")

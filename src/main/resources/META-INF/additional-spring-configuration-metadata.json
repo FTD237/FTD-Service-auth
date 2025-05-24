@@ -3,16 +3,26 @@
     {
       "name": "app.gateway.ip",
       "type": "java.lang.String",
-      "description": "Description for app.gateway.ip."
+      "description": "IP of the api gateway allowed to make request through the auth system."
     },
     {
       "name": "app.gateway.secret-key",
       "type": "java.lang.String",
-      "description": "Description for app.gateway.secret-key."
+      "description": "Secret key used by api gateway to access auth service."
     },
     {
       "name": "app.gateway.header.gateway-secret",
       "type": "java.lang.String",
-      "description": "Description for app.gateway.header.gateway-secret."
+      "description": "Secret key in api-gateway headers requests."
+    },
+    {
+      "name": "application.security.jwt.secret-key",
+      "type": "java.lang.String",
+      "description": "jsonwebtoken secret key for this app."
+    },
+    {
+      "name": "application.security.jwt.expiration",
+      "type": "java.lang.String",
+      "description": "Time before the expiration of the token."
     }
   ] }
