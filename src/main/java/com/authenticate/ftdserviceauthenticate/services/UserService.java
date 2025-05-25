@@ -44,8 +44,7 @@ public class UserService {
 
 
     public void updateUserPassword(UpdatePasswordRequest request) {
-        User user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new UserNotFoundException("user not found"));
+        User user = getUser(request.getEmail());
 
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) throw new BadCredentialsException("password incorrect");
 
@@ -54,15 +53,13 @@ public class UserService {
     }
 
     public void updateUserName(UpdateUsernameRequest request) {
-        User user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new UserNotFoundException("user not found"));
+        User user = getUser(request.getEmail());
 
         user.setUserName(request.getNewUsername());
     }
 
     public void deleteAccount(DeleteAccountRequest request) {
-        User user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new UserNotFoundException("user not found"));
+        User user = getUser(request.getEmail());
 
 
         if (passwordEncoder.matches(request.getPassword(), user.getPassword())) user.disableAccount();

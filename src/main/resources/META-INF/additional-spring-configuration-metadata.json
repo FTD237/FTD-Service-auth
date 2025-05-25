@@ -24,5 +24,10 @@
       "name": "application.security.jwt.expiration",
       "type": "java.lang.String",
       "description": "Time before the expiration of the token."
+    },
+    {
+      "name": "app.frontend.url",
+      "type": "java.lang.String",
+      "description": "URL front password reset."
     }
   ] }

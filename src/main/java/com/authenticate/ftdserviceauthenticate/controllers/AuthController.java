@@ -2,6 +2,7 @@ package com.authenticate.ftdserviceauthenticate.controllers;
 
 import com.authenticate.ftdserviceauthenticate.models.DTOs.*;
 import com.authenticate.ftdserviceauthenticate.services.AuthService;
+import com.authenticate.ftdserviceauthenticate.services.PasswordResetService;
 import com.authenticate.ftdserviceauthenticate.utils.ErrorResponse;
 import com.authenticate.ftdserviceauthenticate.utils.exceptions.UserAlreadyExistsException;
 import com.authenticate.ftdserviceauthenticate.utils.exceptions.UserNotFoundException;
@@ -12,11 +13,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
 
     @Autowired private AuthService authService;
+    @Autowired private PasswordResetService passwordResetService;
+
+    // Rate limiting to avoid spam
+    private final Map<String, List<Long>> requestLog = new ConcurrentHashMap<>();
+    private static final int MAX_REQUESTS = 3;
+    private static final long TIME_WINDOW = 900000;
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody @Valid RegisterRequest requestCredentials) {

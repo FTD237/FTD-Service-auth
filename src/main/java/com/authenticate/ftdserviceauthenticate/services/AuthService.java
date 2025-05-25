@@ -47,5 +47,10 @@ public class AuthService {
         return userService.getUserInfoByEmail(email);
     }
 
+    public void sendForgotPasswordRequest(ForgotPasswordRequest request) {
+        User user = userService.getUser(request.getEmail());
+
+    }
+
 
 }
