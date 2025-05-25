@@ -1,11 +1,7 @@
 package com.authenticate.ftdserviceauthenticate.services;
 
-import com.authenticate.ftdserviceauthenticate.models.DTOs.AuthResponse;
-import com.authenticate.ftdserviceauthenticate.models.DTOs.LoginRequest;
-import com.authenticate.ftdserviceauthenticate.models.DTOs.RegisterRequest;
-import com.authenticate.ftdserviceauthenticate.models.DTOs.UserInfo;
+import com.authenticate.ftdserviceauthenticate.models.DTOs.*;
 import com.authenticate.ftdserviceauthenticate.models.User;
-import com.authenticate.ftdserviceauthenticate.models.DTOs.ValidateRequest;
 import com.authenticate.ftdserviceauthenticate.utils.exceptions.UserAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -50,4 +46,6 @@ public class AuthService {
         String email = jwtService.extractEmail(request.getToken());
         return userService.getUserInfoByEmail(email);
     }
+
+
 }

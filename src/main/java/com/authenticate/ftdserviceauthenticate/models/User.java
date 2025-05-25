@@ -3,6 +3,7 @@ package com.authenticate.ftdserviceauthenticate.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.*;
 
 import java.util.UUID;
@@ -18,8 +19,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     @Email
-    @NotBlank
+    @NotBlank(message = "Email can't be empty")
     private String email;
+    @NotBlank(message = "The password shouldn't be empty")
+    @Pattern(
+            regexp = "^(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
+            message = "The password must contain at least 8 characters, one uppercase letter, one number and one special character."
+    )
     private String password;
     private Integer accountStatus = 1;
     @Column(name = "username")
