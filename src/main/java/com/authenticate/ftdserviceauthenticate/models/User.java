@@ -22,6 +22,7 @@ public class User {
     private String email;
     private String password;
     private Integer accountStatus = 1;
+    @Column(name = "username")
     private String userName;
 
     public void disableAccount() {

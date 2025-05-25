@@ -57,12 +57,19 @@ public class GatewayRequestFilter extends OncePerRequestFilter {
 
     private boolean isValidGatewayRequest(HttpServletRequest request) {
         String clientIp = getClientIpAddress(request);
-        if (!allowedGatewayIp.equals(clientIp) && !"localhost".equals(allowedGatewayIp)) {
+
+        logger.debug("Client IP: {}", clientIp);
+        logger.debug("Expected IP: {}", allowedGatewayIp);
+        logger.debug("Gateway secret header: {}", gatewaySecretHeader);
+
+
+        if (!allowedGatewayIp.equals(clientIp) && !"127.0.0.1".equals(allowedGatewayIp)) {
             logger.warn("IP not autorise: {}, awaited IP {}" ,clientIp, allowedGatewayIp);
             return false;
         }
 
         String gatewaySecret = request.getHeader(gatewaySecretHeader);
+        logger.debug("Gateway secret: {}", gatewaySecret);
         if (!expectedGatewaySecret.equals(gatewaySecret)) {
             logger.warn("Invalid gateway secret");
             return false;
@@ -72,10 +79,21 @@ public class GatewayRequestFilter extends OncePerRequestFilter {
     }
 
     private String getClientIpAddress(HttpServletRequest request) {
+        logger.info("=== DEBUG getClientIpAddress ===");
+        logger.info("X-Forwarded-For header: '{}'", request.getHeader("X-Forwarded-For"));
+        logger.info("X-Real-IP header: '{}'", request.getHeader("X-Real-IP"));
+        logger.info("X-Gateway-Secret header: '{}'", request.getHeader("X-Gateway-Secret"));
+        logger.info("Remote address: '{}'", request.getRemoteAddr());
         String xForwardedFor = request.getHeader("X-Forwarded-For");
         if (xForwardedFor != null && !xForwardedFor.isEmpty()) {
             return xForwardedFor.split(",")[0].trim();
         }
+
+        String xRealIp = request.getHeader("X-Real-IP");
+        if (xRealIp != null && !xRealIp.isEmpty()) {
+            return xRealIp;
+        }
+        logger.info("Using remote address: '{}'", request.getRemoteAddr());
         return request.getRemoteAddr();
     }
 }
