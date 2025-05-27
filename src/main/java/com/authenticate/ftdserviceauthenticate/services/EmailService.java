@@ -17,7 +17,7 @@ public class EmailService {
     @Value("${app.frontend.url}")
     private String frontendUrl;
 
-    public void sendPasswordEmail(String email, String token) {
+    public void sendPasswordResetEmail(String email, String token) {
         try {
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
