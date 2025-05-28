@@ -9,8 +9,6 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
-
 @Service
 public class UserService {
 
@@ -32,10 +30,6 @@ public class UserService {
     public void saveUser(User user) {
         userRepository.save(user);
     }
-
-    public User getUserById(UUID id) { return userRepository.findById(id)
-            .orElseThrow(() -> new UserNotFoundException("user not found")); }
-
 
     public UserInfo getUserInfoByEmail(String email) {
         User user = getUser(email);

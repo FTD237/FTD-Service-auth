@@ -20,12 +20,15 @@ public class User {
     private UUID id;
     @Email
     @NotBlank(message = "Email can't be empty")
+    @Column(unique = true)
     private String email;
     @NotBlank(message = "The password shouldn't be empty")
     @Pattern(
             regexp = "^(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
             message = "The password must contain at least 8 characters, one uppercase letter, one number and one special character."
     )
+
+    @Column(length = 255)
     private String password;
     private Integer accountStatus = 1;
     @Column(name = "username")
