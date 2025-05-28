@@ -1,21 +1,21 @@
 # Configuration de la Gateway
-app.gateway.ip=127.0.0.1
-app.gateway.secret-key=5f8a9c0d3e6b4a7f9e3d2c1b0a987654
-app.gateway.header.gateway-secret=X-Gateway-Secret
+app.gateway.ip=
+app.gateway.secret-key=
+app.gateway.header.gateway-secret=
 
 # app config
 spring.application.name=FTD-service-authenticate
 
 # Database configuration
-spring.datasource.url=jdbc:postgresql://localhost:5432/ftd_auth
-spring.datasource.username=FTD
-spring.datasource.password=FTD_DEV237
+spring.datasource.url=jdbc:postgresql://localhost:5432/
+spring.datasource.username=
+spring.datasource.password=
 spring.datasource.driver-class-name=org.postgresql.Driver
 
 # jwt configuration
-application.security.jwt.secret-key=699095aeea109b3417478251355aaf762c889535
-application.security.jwt.expiration=86400000
-# 86400000 = une journée en millisecondes
+application.security.jwt.secret-key=
+application.security.jwt.expiration=
+# 86400000 = une journÃ©e en millisecondes
 # server configuration
 server.port=8080
 
@@ -28,8 +28,8 @@ logging.level.com.authenticate.ftdserviceauthenticate=DEBUG
 # email configuration - Gmail
 spring.mail.host=smtp.gmail.com
 spring.mail.port=587
-spring.mail.username=ftd.developper@gmail.com
-spring.mail.password=tyflftxqjvmxbdxi
+spring.mail.username=
+spring.mail.password=
 spring.mail.properties.mail.smtp.auth=true
 spring.mail.properties.mail.smtp.starttls.enable=true
 spring.mail.properties.mail.smtp.ssl.trust=smtp.gmail.com
