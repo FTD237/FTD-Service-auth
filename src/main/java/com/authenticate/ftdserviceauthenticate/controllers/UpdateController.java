@@ -10,10 +10,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth/update")
@@ -21,7 +18,7 @@ public class UpdateController {
 
     @Autowired private UserService userService;
 
-    @PostMapping("/password")
+    @PutMapping("/password")
     public ResponseEntity<?> updatePassword(@RequestBody @Valid UpdatePasswordRequest updatePasswordRequest) {
         try {
             userService.updateUserPassword(updatePasswordRequest);
@@ -36,7 +33,7 @@ public class UpdateController {
     }
 
 
-    @PostMapping("/username")
+    @PutMapping("/username")
     public ResponseEntity<?> updateUsername(@RequestBody @Valid UpdateUsernameRequest updateUsernameRequest) {
         try {
             userService.updateUserName(updateUsernameRequest);
@@ -51,7 +48,7 @@ public class UpdateController {
         }
     }
 
-    @PostMapping("/deleteAccount")
+    @PutMapping("/deleteAccount")
     public ResponseEntity<?> deleteAccount(@RequestBody @Valid DeleteAccountRequest deleteAccountRequest) {
         try {
             userService.deleteAccount(deleteAccountRequest);
