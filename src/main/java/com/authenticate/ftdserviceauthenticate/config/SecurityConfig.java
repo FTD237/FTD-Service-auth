@@ -39,10 +39,7 @@
 //        return new GatewayRequestFilter(gatewaySecretHeader, gatewaySecretKey, gatewayIp);
 //    }
 //
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
+
 //
 //    @Bean
 //    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -88,7 +85,7 @@
 //    }
 //}
 
-package com.sourcing.sourcingimm.config;
+package com.authenticate.ftdserviceauthenticate.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
