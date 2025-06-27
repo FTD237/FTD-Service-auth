@@ -39,7 +39,7 @@ public class AuthService {
             
             userService.saveUser(user);
             String token = jwtService.generateToken(user);
-            emailService.sendNewAccountEmail(request.getEmail());
+//            emailService.sendNewAccountEmail(request.getEmail());
             log.info("User registered successfully: {}", request.getEmail());
             return new AuthResponse(token, user.getEmail());
         } catch (DataIntegrityViolationException e) {
