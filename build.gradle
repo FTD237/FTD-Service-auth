@@ -40,13 +40,16 @@ jar {
     archiveClassifier = ''
 }
 
-springBoot {
-    buildInfo()
-    layered{
+
+tasks.named("bootJar") {
+    layered {
         enabled = true
     }
 }
 
+springBoot {
+    buildInfo()
+}
 
 tasks.named('test') {
     useJUnitPlatform()
